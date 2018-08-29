@@ -15,6 +15,8 @@ docker swarm leave --force      # Take down a single node swarm from the manager
 ------------------------------------------------------------------
  Exemples
 ------------------------------------------------------------------
+
+
 mchettih@ubuntu:~/Projects/docker-trainings/Docker.com - Get Started/part3$ docker swarm init
 Swarm initialized: current node (tv0yysdc8vedy621m4a51xghw) is now a manager.
 
