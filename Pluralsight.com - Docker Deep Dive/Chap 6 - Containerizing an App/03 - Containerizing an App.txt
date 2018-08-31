@@ -1,0 +1,5 @@
+docker image build -t psddd-psweb:chap6-ubuntu-18.04 .
+
+docker tag psddd-psweb:chap6-ubuntu-18.04 malikchettih/psddd-psweb:chap6-ubuntu-18.04
+
+docker push malikchettih/psddd-psweb:chap6-ubuntu-18.04
