@@ -1,0 +1,115 @@
+mchettih@ubuntu:~/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/src/psweb-master$ curl --silent --proxy "http://10.41.254.251:8080" --location https://deb.nodesource.com/setup_10.x | sudo -E bash -cd ../../..
+[sudo] Mot de passe de mchettih :
+mchettih@ubuntu:~/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/src/psweb-master$ ^C
+mchettih@ubuntu:~/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/src/psweb-master$ ^C
+mchettih@ubuntu:~/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/src/psweb-master$ cd ../../..
+mchettih@ubuntu:~/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive$ cd ..
+mchettih@ubuntu:~/Projects/docker-trainings$ git add
+Rien de spécifié, rien n'a été ajouté.
+Vous vouliez sûrement dire 'git add .' ?
+mchettih@ubuntu:~/Projects/docker-trainings$ git add .
+mchettih@ubuntu:~/Projects/docker-trainings$ dit commit
+
+La commande « dit » n'a pas été trouvée, mais il y en a 23 similaires.
+
+mchettih@ubuntu:~/Projects/docker-trainings$ git commit
+[master 2677543] Add Chap 6 - Containerizing an app
+ 3 files changed, 28 insertions(+), 5 deletions(-)
+ create mode 100644 Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/03 - Containerizing an App.txt
+ create mode 100644 Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/04 - Digging Deeper.txt
+
+mchettih@ubuntu:~/Projects/docker-trainings$ git push
+Username for 'https://github.com': malikchettih
+Password for 'https://malikchettih@github.com':
+Décompte des objets: 9, fait.
+Delta compression using up to 4 threads.
+Compression des objets: 100% (7/7), fait.
+Écriture des objets: 100% (9/9), 1.20 KiB | 1.20 MiB/s, fait.
+Total 9 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+To https://github.com/malikchettih/docker-trainings.git
+   0642456..2677543  master -> master
+
+mchettih@ubuntu:~/Projects/docker-trainings$ clear
+
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container run -it alpine sh
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+8e3ba11ec2a2: Pull complete
+Digest: sha256:7043076348bf5040220df6ad703798fd8593a0918d06d3ce30c6c93be117e430
+Status: Downloaded newer image for alpine:latest
+/ # ps -elf
+PID   USER     TIME  COMMAND
+    1 root      0:00 sh
+    8 root      0:00 ps -elf
+/ # ps -elf
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+be4c8c8b1d7c        alpine              "sh"                About a minute ago   Up About a minute                       quirky_wozniak
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container run -d alpine sleep 1d
+109eb201e2e7364553f302200ee33d556df973d7a47dcd713b5191a023a81734
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+109eb201e2e7        alpine              "sleep 1d"          16 seconds ago       Up 15 seconds                           brave_benz
+be4c8c8b1d7c        alpine              "sh"                About a minute ago   Up About a minute                       quirky_wozniak
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container stop 8e
+Error response from daemon: No such container: 8e
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container stop 10
+10
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+be4c8c8b1d7c        alpine              "sh"                2 minutes ago       Up 2 minutes                            quirky_wozniak
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                        PORTS               NAMES
+109eb201e2e7        alpine              "sleep 1d"          About a minute ago   Exited (137) 14 seconds ago                       brave_benz
+be4c8c8b1d7c        alpine              "sh"                3 minutes ago        Up 3 minutes                                      quirky_wozniak
+da44ba2677e9        826eb2e05ba3        "node ./app.js"     4 hours ago          Exited (137) 4 hours ago                          cranky_fermat
+2e0f7337b7f9        826eb2e05ba3        "node ./app.js"     4 hours ago          Exited (137) 4 hours ago                          distracted_bhabha
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container start 10
+10
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls -a
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                     PORTS               NAMES
+109eb201e2e7        alpine              "sleep 1d"          About a minute ago   Up 1 second                                    brave_benz
+be4c8c8b1d7c        alpine              "sh"                3 minutes ago        Up 3 minutes                                   quirky_wozniak
+da44ba2677e9        826eb2e05ba3        "node ./app.js"     4 hours ago          Exited (137) 4 hours ago                       cranky_fermat
+2e0f7337b7f9        826eb2e05ba3        "node ./app.js"     4 hours ago          Exited (137) 4 hours ago                       distracted_bhabha
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+109eb201e2e7        alpine              "sleep 1d"          2 minutes ago       Up 12 seconds                           brave_benz
+be4c8c8b1d7c        alpine              "sh"                3 minutes ago       Up 3 minutes                            quirky_wozniak
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container exec -it 10 sh
+/ # ps -elf
+PID   USER     TIME  COMMAND
+    1 root      0:00 sleep 1d
+    7 root      0:00 sh
+   14 root      0:00 ps -elf
+/ # echo "devops FTW" > newfile
+/ # ps -elfread escape sequence
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container stop 10
+10
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container start 10
+10
+
+mchettih@ubuntu:~/Projects/docker-trainings$ docker container exec -it 10 sh
+/ # ls
+bin      etc      lib      mnt      proc     run      srv      tmp      var
+dev      home     media    newfile  root     sbin     sys      usr
+/ # read escape sequence
+
+mchettih@ubuntu:~/Projects/docker-trainings$ 

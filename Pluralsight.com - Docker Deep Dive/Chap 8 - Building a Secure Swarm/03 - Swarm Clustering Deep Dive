@@ -1,0 +1,11 @@
+We have a  sinle docker node.
+docker swarm init -> single node become the manager of the custer nodes.
+Every swarm have a single leader manager mode.
+Best Practices: 3,5 or 7 max nodes for managers.
+
+
+To initialize and use swarm, make this the leader in CA
+Issue Client Certificate
+Create the join tokens and certificate rotation policy.
+
+Docker swarm initialize

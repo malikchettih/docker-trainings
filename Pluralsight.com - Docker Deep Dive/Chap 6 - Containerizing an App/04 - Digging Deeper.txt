@@ -1,0 +1,81 @@
+Dockerfile note
+-------------------------------------
+
+- Text instructions for building images
+- Read by docker image build commad
+- Read from the top, one instructions at a time
+- Write instructions UPPERCASE
+- FROM = first instruction & base image/layer
+- Good idea to start from official iamges
+- RUN = excutes commands and create layers
+- COPY = copy code into image as a new layer.
+
+
+Build context :
+
+mchettih@ubuntu:~$ docker image build -t tag "/home/mchettih/Projects/docker-trainings/Pluralsight.com - Docker Deep Dive/Chap 6 - Containerizing an App/src/psweb-master"
+Sending build context to Docker daemon  10.24kB
+Step 1/21 : FROM ubuntu:18.04
+ ---> 16508e5c265d
+Step 2/21 : ENV http_proxy "http://10.41.254.251:8080"
+ ---> Using cache
+ ---> 7557109b94c1
+Step 3/21 : LABEL maintainer="malik.chettih@gmail.com"
+ ---> Using cache
+ ---> 85d3027bfb0f
+Step 4/21 : RUN export http_proxy=$http_proxy
+ ---> Using cache
+ ---> b2a5f4eeca2f
+Step 5/21 : RUN export https_proxy=$http_proxy
+ ---> Using cache
+ ---> a2bdea0879ab
+Step 6/21 : RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 3e5b2eeed67c
+Step 7/21 : RUN apt-get update
+ ---> Using cache
+ ---> cd800288dd0e
+Step 8/21 : RUN apt-get install --yes curl
+ ---> Using cache
+ ---> 27fe357f9abc
+Step 9/21 : RUN apt-get install --yes nodejs
+ ---> Using cache
+ ---> 65b4aef6329d
+Step 10/21 : RUN apt-get install --yes build-essential
+ ---> Using cache
+ ---> 5a17da8f473f
+Step 11/21 : RUN apt-get install --yes npm
+ ---> Using cache
+ ---> a3afe5ddea8f
+Step 12/21 : COPY . /src
+ ---> Using cache
+ ---> 21e8a4a78c00
+Step 13/21 : WORKDIR /src
+ ---> Using cache
+ ---> 53398547b25f
+Step 14/21 : RUN  npm config set strict-ssl false
+ ---> Using cache
+ ---> 10420f8568eb
+Step 15/21 : RUN  npm config set registry "http://registry.npmjs.org/"
+ ---> Using cache
+ ---> 089ffc512a86
+Step 16/21 : RUN  npm config set proxy $http_proxy
+ ---> Using cache
+ ---> d72acc235458
+Step 17/21 : RUN  npm config set https-proxy $http_proxy
+ ---> Using cache
+ ---> d151bdb0cd7f
+Step 18/21 : RUN  npm install npm --global
+ ---> Using cache
+ ---> 415d37093c58
+Step 19/21 : RUN  npm install
+ ---> Using cache
+ ---> 815f239936ec
+Step 20/21 : EXPOSE 8080
+ ---> Using cache
+ ---> 3ac96dff5e95
+Step 21/21 : ENTRYPOINT ["node", "./app.js"]
+ ---> Using cache
+ ---> 908b61bdf1a9
+Successfully built 908b61bdf1a9
+Successfully tagged tag:latest
