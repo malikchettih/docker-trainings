@@ -1,7 +1,9 @@
 # docker-trainings
 
 ## Ubuntu 18.04 - Docker installation scripts
-'''
+
+To install docker-ce to Unbuntu 18.04 workstation execute the folowing scripts
+```
 sudo apt-get update
 
 sudo apt-get --yes install \
@@ -22,4 +24,4 @@ sudo apt-get update
 sudo apt-get --yes install docker-ce   
 
 sudo usermod -aG docker $USER    
-'''
+```
